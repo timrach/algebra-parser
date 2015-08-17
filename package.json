@@ -11,7 +11,7 @@
     "src/"
   ],
   "Dependencies":{
-    "algebra.js": "0.1.4",
+    "algebra.js": "0.1.4"
   },
   "devDependencies": {
     "browserify": "11.0.1",
