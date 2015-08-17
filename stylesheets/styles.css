@@ -659,11 +659,7 @@ header {
   right: 0;
   width: 100%;
   text-align: center;
-  background: url(../images/background.png) #4276b6;
-  -moz-box-shadow: 1px 0px 2px rgba(0, 0, 0, 0.75);
-  -webkit-box-shadow: 1px 0px 2px rgba(0, 0, 0, 0.75);
-  -o-box-shadow: 1px 0px 2px rgba(0, 0, 0, 0.75);
-  box-shadow: 1px 0px 2px rgba(0, 0, 0, 0.75);
+  background: #FFBF00;
   z-index: 99;
   -webkit-font-smoothing: antialiased;
   min-height: 76px;
@@ -671,7 +667,6 @@ header {
 header h1 {
   font: 40px/48px "Copse", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #f3f3f3;
-  text-shadow: 0px 2px 0px #235796;
   margin: 0px;
   white-space: nowrap;
   overflow: hidden;
@@ -680,8 +675,7 @@ header h1 {
   -ms-text-overflow: ellipsis;
 }
 header p {
-  color: #d8d8d8;
-  text-shadow: rgba(0, 0, 0, 0.2) 0 1px 0;
+  color: #ffffff;
   font-size: 18px;
   margin: 0px;
 }
@@ -689,22 +683,11 @@ header p {
 #banner {
   z-index: 100;
   left: 0;
-  right: 50%;
+  right: 0%;
   height: 50px;
-  margin-right: -382px;
   position: fixed;
   top: 115px;
-  background: #ffcc00;
-  border: 1px solid #f0b500;
-  -moz-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
-  -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
-  -o-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
-  -moz-border-radius: 0px 2px 2px 0px;
-  -webkit-border-radius: 0px 2px 2px 0px;
-  -o-border-radius: 0px 2px 2px 0px;
-  -ms-border-radius: 0px 2px 2px 0px;
-  -khtml-border-radius: 0px 2px 2px 0px;
+  background: #DDDDDD;
   border-radius: 0px 2px 2px 0px;
   padding-right: 10px;
 }
@@ -748,7 +731,7 @@ header p {
 }
 #banner .fork {
   position: fixed;
-  left: 50%;
+  right: 5%;
   margin-left: -325px;
   padding: 10px 12px;
   margin-top: 6px;
