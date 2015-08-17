@@ -2,8 +2,7 @@
 var Lexer = require('./lexer'),
     algebra = require('algebra.js'),
     Expression = algebra.Expression,
-    Equation = algebra.Equation,
-    Fraction = algebra.Fraction;
+    Equation = algebra.Equation;
 
 /*
 This parser module uses the shunting yard algorithm to convert input strings
@@ -193,16 +192,3 @@ Parser.prototype.construct_expression = function() {
 };
 
 module.exports = Parser;
-
-//  var p = new Parser();
-// // var e1 = p.parse('2@$+4%*x!§&?ß`´"#_:;,.€');
-// var e1 = p.parse('2+(4*x))');
-// // //var e1 = p.parse('1/9 * x - 4/9 = x + 6')
-// // //var e1 = p.parse('2 * x + 2 = 6')
-// // //var e1 = p.parse('3 + 4 * 2 / ( 1 - 5 ) ^ 2 ^ 3');
-// // console.log(p.output);
-// console.log(e1.toString());
-// //console.log(e1.solveFor('x').toString());
-
-
-
