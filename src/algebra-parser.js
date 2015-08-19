@@ -5,8 +5,8 @@ var Lexer = require('./lexer'),
     Equation = algebra.Equation;
 
 /*
-This parser module uses the shunting yard algorithm to convert input strings
-to algebraic expressions using the algebra.js module.
+    This parser module uses the shunting yard algorithm to convert input strings
+    to algebraic expressions using the algebra.js module.
 */
 var Parser = function() {
     this.lexer = new Lexer();
@@ -36,6 +36,11 @@ var Parser = function() {
 };
 
 
+/*
+    Initializes the parser internals and the lexer.
+    The input is then parsed using the shunting yard algorithm
+    and the expression tree is constructed and returned as the result
+*/
 Parser.prototype.parse = function(input) {
     this.operator_stack = []; // empty the operator stack
     this.output = []; //empty the output stack
@@ -69,7 +74,6 @@ Parser.prototype.shunting_yard = function() {
     while(this.current_token !== null){
         //If the token is a number, then add it to the output queue.
         if(this.current_token.type === 'NUMBER' || this.current_token.type === 'IDENTIFIER'){
-            //console.log(this.current_token.value + ' added to ouput queue');
             this.output.push(this.current_token);
         //If the token is an operator, o1, then:
         }else if (this.current_token.type ==='OPERATOR'){
@@ -123,21 +127,30 @@ Parser.prototype.shunting_yard = function() {
             this.stack_head_to_ouput();
         }
     }
-    // console.log(this.stack_top());
     //Exit.
 };
 
 //Converts the base types NUMBER and IDENTIFIER to an Expression.
 Parser.prototype.convert_for_application = function(operand) {
-    var result = operand;
-    if(operand.type !== undefined){
+    if(operand.type === 'NUMBER'){
+        //Integer conversion
         if(parseInt(operand.value) == operand.value){
-            result = new Expression(parseInt(operand.value));    
+            return new Expression(parseInt(operand.value));      
         }else{
-            result = new Expression(operand.value);
+            //Split the decimal number to integer and decimal parts
+            var splits = operand.value.split('.');
+            //count the digits of the decimal part
+            var decimals = splits[1].length;
+            //determine the multiplication factor
+            var factor = Math.pow(10,decimals);
+            var float_op = parseFloat(operand.value);
+            //multiply the float with the factor and divide it again afterwards 
+            //to create a valid expression object
+            return new Expression(parseInt(float_op * factor)).divide(factor);
         }
+    } else {
+        return new Expression(operand.value);
     }
-    return result;
 };
 
 /*  
@@ -148,10 +161,7 @@ Parser.prototype.convert_for_application = function(operand) {
 */
 Parser.prototype.apply_operator = function(op, lhs, rhs) {
     var result;  
-    //Perform operand type conversions if needed
-    lhs = this.convert_for_application(lhs);
-    rhs = this.convert_for_application(rhs);
-    
+   
     //Apply the operator
     switch(op.value){
         case 'PLUS': result = lhs.add(rhs);break;
@@ -180,6 +190,7 @@ Parser.prototype.apply_operator = function(op, lhs, rhs) {
 Parser.prototype.construct_expression = function() {
     //Read the stack head
     var head = this.output.pop();
+    if(head === undefined) throw new Error("Missing operand")
     //If its an operator, recursively construct the operands and apply the operator to construct the node
     if(head.type === 'OPERATOR'){
         var rhs = this.construct_expression();
@@ -187,7 +198,7 @@ Parser.prototype.construct_expression = function() {
         return this.apply_operator(head, lhs,rhs);
     }else{
         //If it is not an operator, it can only be a number or a variable, which are leaves in the tree
-        return head;
+        return this.convert_for_application(head);
     }
 };
 
