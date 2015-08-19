@@ -1,3 +1,7 @@
+#Note:
+This parser was integrated into the algebra.js library. 
+There should be no reason to use this module except you just want to.
+
 #Usage
 
 Create a parser object and pass the equation or expression to the 'parse' 
