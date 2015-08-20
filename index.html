@@ -24,7 +24,7 @@
       var solveInput = function(){
         var variable = document.getElementById("solve-for").value;
         var solution = e.solveFor(variable);
-        katex.render(variable + " = " + solution.toTex(), solvedExpression);
+        katex.render(p.parse(variable).toTex() + " = " + solution.toTex(), solvedExpression);
       }
     </script>
     <!--[if lt IE 9]>
